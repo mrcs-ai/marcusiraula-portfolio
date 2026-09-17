@@ -1,1042 +1,443 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: transparent;
+  overflow-x: hidden;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.services-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px 30px;
+}
+
+/* =========================
+   DESKTOP LAYOUT
+========================= */
+
+.service-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  width: 100%;
+}
+
+/* Each complete service */
+.service-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.service-card {
+  width: 100%;
+  min-height: 390px;
+  padding: 38px 28px;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: #7A1F3D;
+  border: 1px solid rgba(255,255,255,0.12);
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* Number / Icon */
+.service-number {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 24px;
+
+  background: rgba(255,255,255,0.14);
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Card title */
+.service-title {
+  margin: 0;
+  color: #ffffff;
+
+  font-size: 25px;
+  line-height: 1.25;
+  font-weight: 700;
+}
 
-  <title>Service Cards</title>
+/* =========================
+   DESCRIPTION OUTSIDE CARD
+========================= */
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap"
-    rel="stylesheet"
-  >
+.service-description {
+  margin: 20px 4px 0;
 
-  <style>
+  color: #333333;
 
-    :root {
-      --ink: #262626;
-      --turquoise: #00cecb;
-      --card: #ffffea;
-      --subtext: #6b6b6b;
-      --line: #dedecb;
-    }
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+/* =========================
+   BUTTON OUTSIDE CARD
+========================= */
 
-    html,
-    body {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
+.service-button {
+  align-self: center;
 
-    body {
-      font-family: "Nunito Sans", system-ui, sans-serif;
-      color: var(--ink);
-      background: transparent;
-      overflow-x: hidden;
-    }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  margin-top: 22px;
 
-    /* =========================================================
-       MAIN CONTAINER
-       ========================================================= */
+  padding: 12px 22px;
 
-    .service-cards-shell {
-      width: 100%;
-      max-width: 1400px;
+  border-radius: 999px;
 
-      margin: 0 auto;
+  background: #7A1F3D;
+  color: #ffffff;
 
-      padding: 8px 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
 
-      background: transparent;
-    }
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
 
+/* ONLY THE BUTTON MOVES */
+.service-button:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
 
-    /* =========================================================
-       DESKTOP GRID
-       ========================================================= */
+/* =========================
+   TABLET
+========================= */
 
-    .service-cards-grid {
-      display: grid;
+@media (max-width: 900px) {
 
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+  .service-cards-grid {
+    gap: 20px;
+  }
 
-      gap: 50px;
+  .service-card {
+    min-height: 360px;
+    padding: 32px 22px;
+  }
 
-      width: 100%;
+  .service-title {
+    font-size: 22px;
+  }
+}
 
-      padding: 8px;
-    }
+/* =========================
+   MOBILE
+   COMPLETELY DIFFERENT
+   STRUCTURE
+========================= */
 
+@media (max-width: 760px) {
 
-    /* =========================================================
-       SERVICE ITEM
-       ========================================================= */
+  .services-wrapper {
+    width: 100%;
+    padding: 10px 18px 40px;
+  }
 
-    .service-item {
-      display: flex;
-      flex-direction: column;
+  /*
+     IMPORTANT:
+     Do NOT use CSS grid here.
+     The services become a normal
+     vertical document flow.
+  */
 
-      min-width: 0;
-    }
+  .service-cards-grid {
+    display: flex !important;
+    flex-direction: column !important;
 
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
 
-    /* =========================================================
-       CARD
-       ========================================================= */
+    gap: 38px !important;
 
-    .service-card {
-      position: relative;
+    align-items: stretch !important;
+  }
 
-      display: flex;
-      align-items: flex-start;
+  /*
+     Each service is completely independent.
+     Its height is determined by its content.
+  */
 
-      width: 100%;
+  .service-item {
+    display: flex !important;
+    flex-direction: column !important;
 
-      min-width: 0;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
 
-      min-height: 390px;
+    flex: none !important;
 
-      padding: 28px;
+    position: relative !important;
+  }
 
-      border: 1px solid var(--line);
-      border-radius: 22px;
+  /*
+     CARD ONLY
+     Number + title live here.
+  */
 
-      background: var(--card);
+  .service-card {
+    display: flex !important;
 
-      overflow: hidden;
+    width: 100% !important;
 
-      box-shadow:
-        0 5px 18px rgba(38, 38, 38, 0.045);
+    height: 190px !important;
+    min-height: 190px !important;
+    max-height: none !important;
 
-      transition:
-        box-shadow 0.3s ease,
-        border-color 0.3s ease;
-    }
+    flex: none !important;
 
+    padding: 25px 20px !important;
 
-    /* =========================================================
-       CARD HOVER
-       ========================================================= */
+    border-radius: 18px !important;
 
-    .service-card:hover,
-    .service-card:focus-visible {
+    align-items: center !important;
+    justify-content: center !important;
 
-      border-color: #bdbdbd;
+    overflow: visible !important;
+  }
 
-      box-shadow:
-        0 18px 34px rgba(38, 38, 38, 0.11);
+  .service-number {
+    width: 46px !important;
+    height: 46px !important;
 
-      transform: none;
-    }
+    margin-bottom: 15px !important;
 
-    .service-card:focus-visible {
-      outline: 2px solid var(--turquoise);
-      outline-offset: 4px;
-    }
+    font-size: 16px !important;
+    flex: none !important;
+  }
 
+  .service-title {
+    width: 100% !important;
 
-    /* =========================================================
-       CARD CONTENT
-       ========================================================= */
+    margin: 0 !important;
 
-    .service-card-content {
-      position: relative;
-      z-index: 2;
+    font-size: 21px !important;
+    line-height: 1.3 !important;
 
-      width: 100%;
+    text-align: center !important;
+  }
 
-      text-align: left;
-    }
+  /*
+     DESCRIPTION IS NOW CLEARLY
+     BELOW THE CARD.
+  */
 
+  .service-description {
+    display: block !important;
 
-    /* =========================================================
-       NUMBER
-       ========================================================= */
+    width: 100% !important;
 
-    .service-number {
-      display: block;
+    height: auto !important;
+    min-height: 0 !important;
 
-      margin: 0 0 17px;
+    margin: 13px 0 0 !important;
+    padding: 0 4px !important;
 
-      color: var(--turquoise);
+    font-size: 15px !important;
+    line-height: 1.55 !important;
 
-      font-size: 0.85rem;
-      font-weight: 700;
+    text-align: center !important;
 
-      letter-spacing: 0.14em;
+    position: static !important;
+  }
 
-      line-height: 1;
-    }
+  /*
+     BUTTON IS ALSO BELOW THE
+     DESCRIPTION.
+  */
 
+  .service-button {
+    display: inline-flex !important;
 
-    /* =========================================================
-       TITLE
-       ========================================================= */
+    width: fit-content !important;
 
-    .service-card-title {
+    align-self: center !important;
 
-      width: 100%;
-      max-width: 100%;
+    margin: 11px auto 0 !important;
 
-      margin: 0;
+    position: static !important;
 
-      color: var(--ink);
+    padding: 11px 20px !important;
 
-      font-size: 22px;
-      font-weight: 700;
+    font-size: 13px !important;
+  }
+}
 
-      line-height: 1.2;
+/* =========================
+   SMALL PHONES
+========================= */
 
-      text-align: left;
+@media (max-width: 400px) {
 
-      text-wrap: balance;
+  .services-wrapper {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
 
-      overflow-wrap: normal;
-      word-break: normal;
-    }
+  .service-card {
+    height: 175px !important;
+    min-height: 175px !important;
 
+    padding: 20px 16px !important;
+  }
 
-    /* =========================================================
-       DESCRIPTION
-       
-       OUTSIDE CARD
-       ========================================================= */
+  .service-title {
+    font-size: 19px !important;
+  }
 
-    .service-description {
-
-      width: 100%;
-
-      margin: 20px 0 0;
-
-      color: var(--subtext);
-
-      font-size: 15px;
-      font-weight: 300;
-
-      line-height: 1.58;
-
-      text-align: left;
-    }
-
-
-    /* =========================================================
-       BUTTON
-       
-       OUTSIDE CARD
-       ========================================================= */
-
-    .service-button {
-
-      display: inline-flex;
-
-      align-items: center;
-      justify-content: center;
-
-      align-self: flex-start;
-
-      width: fit-content;
-
-      margin: 22px 0 0;
-
-      padding: 10px 20px;
-
-      border: 1.5px solid var(--turquoise);
-      border-radius: 999px;
-
-      color: var(--turquoise);
-      background: transparent;
-
-      font-family: "Nunito Sans", system-ui, sans-serif;
-
-      font-size: 15px;
-      font-weight: 700;
-
-      line-height: 1;
-
-      text-decoration: none;
-
-      transition:
-        background-color 0.25s ease,
-        color 0.25s ease,
-        border-color 0.25s ease,
-        transform 0.25s ease;
-    }
-
-
-    /* =========================================================
-       BUTTON HOVER
-       ========================================================= */
-
-    .service-button:hover {
-
-      color: #ffffff;
-
-      background: var(--turquoise);
-      border-color: var(--turquoise);
-
-      transform: translateY(-3px);
-    }
-
-    .service-button:focus-visible {
-      outline: 2px solid var(--turquoise);
-      outline-offset: 4px;
-    }
-
-
-    /* =========================================================
-       DECORATIVE VISUALS
-       ========================================================= */
-
-    .service-visual {
-
-      position: absolute;
-
-      top: 30px;
-      right: 30px;
-
-      width: 92px;
-      height: 92px;
-
-      color: var(--turquoise);
-
-      opacity: 0.72;
-
-      pointer-events: none;
-    }
-
-
-    /* =========================================================
-       CALENDAR
-       ========================================================= */
-
-    .calendar-motif {
-
-      border: 1.5px solid currentColor;
-
-      border-radius: 11px;
-    }
-
-    .calendar-motif::before {
-
-      content: "";
-
-      position: absolute;
-
-      top: 21px;
-      right: 0;
-      left: 0;
-
-      border-top: 1.5px solid currentColor;
-    }
-
-    .calendar-motif::after {
-
-      content: "";
-
-      position: absolute;
-
-      top: 37px;
-      left: 18px;
-
-      width: 8px;
-      height: 8px;
-
-      border: 1.5px solid currentColor;
-
-      box-shadow:
-
-        22px 0 0 -1.5px var(--card),
-        22px 0 0 0 currentColor,
-
-        0 22px 0 -1.5px var(--card),
-        0 22px 0 0 currentColor,
-
-        22px 22px 0 -1.5px var(--card),
-        22px 22px 0 0 currentColor;
-    }
-
-    .calendar-rings {
-
-      position: absolute;
-
-      top: -6px;
-      left: 22px;
-
-      width: 47px;
-      height: 13px;
-
-      border-right: 1.5px solid currentColor;
-      border-left: 1.5px solid currentColor;
-    }
-
-
-    /* =========================================================
-       PROFILE
-       ========================================================= */
-
-    .profile-motif {
-
-      border: 1.5px solid currentColor;
-
-      border-radius: 50%;
-    }
-
-    .profile-motif::before {
-
-      content: "";
-
-      position: absolute;
-
-      top: 17px;
-      left: 33px;
-
-      width: 23px;
-      height: 23px;
-
-      border: 1.5px solid currentColor;
-
-      border-radius: 50%;
-    }
-
-    .profile-motif::after {
-
-      content: "";
-
-      position: absolute;
-
-      bottom: 16px;
-      left: 21px;
-
-      width: 48px;
-      height: 28px;
-
-      border: 1.5px solid currentColor;
-
-      border-bottom: 0;
-
-      border-radius:
-        28px 28px 0 0;
-    }
-
-    .profile-line {
-
-      position: absolute;
-
-      right: -15px;
-      bottom: 14px;
-
-      width: 46px;
-
-      border-top: 1.5px solid currentColor;
-    }
-
-
-    /* =========================================================
-       NETWORK NODES
-       ========================================================= */
-
-    .nodes-motif::before,
-    .nodes-motif::after,
-    .node-center {
-
-      content: "";
-
-      position: absolute;
-
-      width: 16px;
-      height: 16px;
-
-      border: 1.5px solid currentColor;
-
-      border-radius: 50%;
-
-      background: transparent;
-    }
-
-    .nodes-motif::before {
-
-      top: 8px;
-      right: 7px;
-    }
-
-    .nodes-motif::after {
-
-      bottom: 8px;
-      left: 7px;
-    }
-
-    .node-center {
-
-      top: 39px;
-      left: 39px;
-    }
-
-    .node-line {
-
-      position: absolute;
-
-      top: 45px;
-      left: 21px;
-
-      width: 50px;
-
-      border-top: 1.5px solid currentColor;
-
-      transform:
-        rotate(-38deg);
-
-      transform-origin: center;
-    }
-
-    .node-line-secondary {
-
-      position: absolute;
-
-      top: 46px;
-      left: 23px;
-
-      width: 46px;
-
-      border-top: 1.5px solid currentColor;
-
-      transform:
-        rotate(39deg);
-
-      transform-origin: center;
-    }
-
-
-    /* =========================================================
-       TABLET
-       ========================================================= */
-
-    @media (max-width: 1100px) {
-
-      .service-cards-shell {
-        padding: 6px 8px 20px;
-      }
-
-      .service-cards-grid {
-        gap: 35px;
-      }
-
-      .service-card {
-
-        min-height: 350px;
-
-        padding: 24px;
-      }
-
-      .service-visual {
-
-        top: 25px;
-        right: 25px;
-
-        transform:
-          scale(0.88);
-
-        transform-origin:
-          top right;
-      }
-
-      .service-card-title {
-        font-size: 20px;
-      }
-
-      .service-description {
-        font-size: 14px;
-        line-height: 1.5;
-      }
-
-      .service-button {
-
-        font-size: 14px;
-
-        padding:
-          9px 18px;
-      }
-    }
-
-
-    /* =========================================================
-       MOBILE
-       
-       THIS IS THE IMPORTANT PART.
-       
-       Each service is independent:
-       
-       CARD
-       DESCRIPTION
-       BUTTON
-       
-       then the next service.
-       
-       There is NO fixed three-row height.
-       ========================================================= */
-
-    @media (max-width: 760px) {
-
-      .service-cards-shell {
-
-        width: 100%;
-
-        /*
-          Let the content determine the height.
-          This prevents the cards from being squeezed.
-        */
-
-        height: auto;
-
-        padding:
-          6px 10px 30px;
-      }
-
-
-      .service-cards-grid {
-
-        /*
-          ONE COLUMN.
-        */
-
-        display: flex;
-        flex-direction: column;
-
-        gap: 34px;
-
-        width: 100%;
-        height: auto;
-
-        padding:
-          4px;
-      }
-
-
-      /* =====================================================
-         MOBILE SERVICE
-         ===================================================== */
-
-      .service-item {
-
-        display: flex;
-        flex-direction: column;
-
-        width: 100%;
-        height: auto;
-
-        min-width: 0;
-      }
-
-
-      /* =====================================================
-         MOBILE CARD
-         ===================================================== */
-
-      .service-card {
-
-        width: 100%;
-
-        /*
-          Proper card height.
-          It is no longer squeezed into a grid row.
-        */
-
-        height: 190px;
-
-        min-height: 190px;
-
-        padding:
-          20px 20px;
-
-        border-radius: 17px;
-      }
-
-
-      /* =====================================================
-         MOBILE VISUAL
-         ===================================================== */
-
-      .service-visual {
-
-        top: 18px;
-        right: 18px;
-
-        width: 65px;
-        height: 65px;
-
-        transform:
-          scale(0.68);
-
-        transform-origin:
-          top right;
-      }
-
-
-      /* =====================================================
-         MOBILE NUMBER
-         ===================================================== */
-
-      .service-number {
-
-        margin-bottom: 11px;
-
-        font-size: 10px;
-
-        letter-spacing: 0.1em;
-      }
-
-
-      /* =====================================================
-         MOBILE TITLE
-         ===================================================== */
-
-      .service-card-title {
-
-        width: 100%;
-
-        max-width: 78%;
-
-        font-size: 18px;
-
-        line-height: 1.2;
-
-        text-align: left;
-      }
-
-
-      /* =====================================================
-         MOBILE DESCRIPTION
-         ===================================================== */
-
-      .service-description {
-
-        width: 100%;
-
-        margin:
-          13px 0 0;
-
-        font-size: 12px;
-
-        line-height: 1.45;
-
-        text-align: left;
-      }
-
-
-      /* =====================================================
-         MOBILE BUTTON
-         ===================================================== */
-
-      .service-button {
-
-        align-self: flex-start;
-
-        margin:
-          11px 0 0;
-
-        padding:
-          7px 13px;
-
-        font-size: 10px;
-      }
-    }
-
-
-    /* =========================================================
-       SMALL PHONES
-       ========================================================= */
-
-    @media (max-width: 390px) {
-
-      .service-cards-shell {
-
-        padding:
-          5px 8px 25px;
-      }
-
-
-      .service-cards-grid {
-
-        gap: 30px;
-
-        padding:
-          3px;
-      }
-
-
-      .service-card {
-
-        height: 175px;
-
-        min-height: 175px;
-
-        padding:
-          17px 16px;
-
-        border-radius: 15px;
-      }
-
-
-      .service-visual {
-
-        top: 14px;
-        right: 15px;
-
-        width: 55px;
-        height: 55px;
-
-        transform:
-          scale(0.58);
-      }
-
-
-      .service-number {
-
-        margin-bottom: 9px;
-
-        font-size: 9px;
-      }
-
-
-      .service-card-title {
-
-        max-width: 76%;
-
-        font-size: 16px;
-
-        line-height: 1.17;
-      }
-
-
-      .service-description {
-
-        margin-top: 9px;
-
-        font-size: 10px;
-
-        line-height: 1.38;
-      }
-
-
-      .service-button {
-
-        margin-top: 8px;
-
-        padding:
-          6px 11px;
-
-        font-size: 9px;
-      }
-    }
-
-
-    /* =========================================================
-       ACCESSIBILITY
-       ========================================================= */
-
-    @media (prefers-reduced-motion: reduce) {
-
-      .service-card,
-      .service-button {
-
-        transition:
-          box-shadow 0.3s ease,
-          border-color 0.3s ease,
-          background-color 0.3s ease,
-          color 0.3s ease;
-      }
-
-      .service-card:hover,
-      .service-card:focus-visible,
-      .service-button:hover {
-
-        transform: none;
-      }
-    }
-
-  </style>
+  .service-description {
+    font-size: 14px !important;
+  }
+}
+</style>
 </head>
-
 
 <body>
 
-  <main class="service-cards-shell">
+<div class="services-wrapper">
 
-    <section
-      class="service-cards-grid"
-      aria-label="LinkedIn and content services"
-    >
+  <div class="service-cards-grid">
 
+    <!-- =========================
+         SERVICE 1
+    ========================== -->
 
-      <!-- =====================================================
-           SERVICE 01
-           ===================================================== -->
+    <div class="service-item">
 
-      <div class="service-item">
+      <div class="service-card">
 
-        <article
-          class="service-card"
-          tabindex="0"
-        >
+        <div class="service-number">01</div>
 
-          <div
-            class="service-visual calendar-motif"
-            aria-hidden="true"
-          >
-            <span class="calendar-rings"></span>
-          </div>
-
-
-          <div class="service-card-content">
-
-            <span class="service-number">
-              01
-            </span>
-
-            <h2 class="service-card-title">
-              Content Planning &amp; Social Media Management
-            </h2>
-
-          </div>
-
-        </article>
-
-
-        <p class="service-description">
-          Plan, create, organize, schedule and publish content across LinkedIn, Facebook, Instagram and other platforms.
-        </p>
-
-
-        <!-- BUTTON 01
-             Replace # with your Google Sites page link. -->
-
-        <a
-          class="service-button"
-          href="#"
-          target="_self"
-        >
-          View Service
-        </a>
+        <h3 class="service-title">
+          Content Planning &amp;<br>
+          Social Media Management
+        </h3>
 
       </div>
 
+      <div class="service-description">
+        Plan, create, and publish content that keeps your social media active, consistent, and aligned with your brand.
+      </div>
 
-      <!-- =====================================================
-           SERVICE 02
-           ===================================================== -->
+      <!-- CHANGE THIS # TO YOUR SERVICE PAGE LINK -->
+      <a href="#" class="service-button">
+        View Service
+      </a>
 
-      <div class="service-item">
-
-        <article
-          class="service-card"
-          tabindex="0"
-        >
-
-          <div
-            class="service-visual profile-motif"
-            aria-hidden="true"
-          >
-            <span class="profile-line"></span>
-          </div>
+    </div>
 
 
-          <div class="service-card-content">
+    <!-- =========================
+         SERVICE 2
+    ========================== -->
 
-            <span class="service-number">
-              02
-            </span>
+    <div class="service-item">
 
-            <h2 class="service-card-title">
-              LinkedIn Content &amp; Presence
-            </h2>
+      <div class="service-card">
 
-          </div>
+        <div class="service-number">02</div>
 
-        </article>
-
-
-        <p class="service-description">
-          Manage LinkedIn content, optimise profiles and company pages, and help maintain a professional and consistent presence.
-        </p>
-
-
-        <!-- BUTTON 02
-             Replace # with your Google Sites page link. -->
-
-        <a
-          class="service-button"
-          href="#"
-          target="_self"
-        >
-          View Service
-        </a>
+        <h3 class="service-title">
+          LinkedIn Content &amp;<br>
+          Presence
+        </h3>
 
       </div>
 
+      <div class="service-description">
+        Build a professional LinkedIn presence with thoughtful content, profile optimisation, and consistent publishing.
+      </div>
 
-      <!-- =====================================================
-           SERVICE 03
-           ===================================================== -->
+      <!-- CHANGE THIS # TO YOUR SERVICE PAGE LINK -->
+      <a href="#" class="service-button">
+        View Service
+      </a>
 
-      <div class="service-item">
-
-        <article
-          class="service-card"
-          tabindex="0"
-        >
-
-          <div
-            class="service-visual nodes-motif"
-            aria-hidden="true"
-          >
-            <span class="node-center"></span>
-            <span class="node-line"></span>
-            <span class="node-line-secondary"></span>
-          </div>
+    </div>
 
 
-          <div class="service-card-content">
+    <!-- =========================
+         SERVICE 3
+    ========================== -->
 
-            <span class="service-number">
-              03
-            </span>
+    <div class="service-item">
 
-            <h2 class="service-card-title">
-              LinkedIn Lead Generation &amp; Outreach
-            </h2>
+      <div class="service-card">
 
-          </div>
+        <div class="service-number">03</div>
 
-        </article>
-
-
-        <p class="service-description">
-          Research prospects, manage connection and outreach activity, track conversations and hand qualified leads back to the client.
-        </p>
-
-
-        <!-- BUTTON 03
-             Replace # with your Google Sites page link. -->
-
-        <a
-          class="service-button"
-          href="#"
-          target="_self"
-        >
-          View Service
-        </a>
+        <h3 class="service-title">
+          LinkedIn Lead Generation<br>
+          &amp; Outreach
+        </h3>
 
       </div>
 
+      <div class="service-description">
+        Find and connect with potential clients, start meaningful conversations, and help turn LinkedIn connections into opportunities.
+      </div>
 
-    </section>
+      <!-- CHANGE THIS # TO YOUR SERVICE PAGE LINK -->
+      <a href="#" class="service-button">
+        View Service
+      </a>
 
-  </main>
+    </div>
+
+  </div>
+
+</div>
 
 </body>
 </html>
