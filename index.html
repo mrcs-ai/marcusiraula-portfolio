@@ -28,16 +28,15 @@
     html,
     body {
       width: 100%;
-      min-height: 100%;
       margin: 0;
       padding: 0;
-      overflow: hidden;
     }
 
     body {
       font-family: "Nunito Sans", system-ui, sans-serif;
       color: var(--ink);
       background: transparent;
+      overflow: hidden;
     }
 
 
@@ -48,6 +47,7 @@
     .service-cards-shell {
       width: 100%;
       max-width: 1400px;
+
       height: 100%;
 
       margin: 0 auto;
@@ -59,7 +59,7 @@
 
 
     /* =========================================================
-       SERVICE GRID
+       DESKTOP GRID
        ========================================================= */
 
     .service-cards-grid {
@@ -80,10 +80,9 @@
     /* =========================================================
        SERVICE ITEM
        
-       Each item contains:
-       1. Card
-       2. Description
-       3. Button
+       CARD
+       DESCRIPTION
+       BUTTON
        ========================================================= */
 
     .service-item {
@@ -113,7 +112,7 @@
       height: 100%;
 
       min-width: 0;
-      min-height: 250px;
+      min-height: 300px;
 
       padding: 28px;
 
@@ -136,7 +135,7 @@
     /* =========================================================
        CARD HOVER
        
-       THE CARD DOES NOT MOVE.
+       CARD DOES NOT MOVE
        ========================================================= */
 
     .service-card:hover,
@@ -289,7 +288,7 @@
     /* =========================================================
        BUTTON HOVER
        
-       ONLY THE BUTTON MOVES.
+       ONLY BUTTON MOVES
        ========================================================= */
 
     .service-button:hover {
@@ -547,7 +546,7 @@
 
       .service-card {
 
-        min-height: 220px;
+        min-height: 260px;
 
         padding: 24px;
       }
@@ -586,50 +585,45 @@
     /* =========================================================
        MOBILE
        
-       EACH SERVICE IS A COMPLETE VERTICAL SECTION:
+       IMPORTANT:
        
-       CARD
-       ↓
-       DESCRIPTION
-       ↓
-       BUTTON
-       ↓
-       CARD
-       ↓
-       DESCRIPTION
-       ↓
-       BUTTON
+       We are NOT squeezing the three services
+       into three equal tiny rows anymore.
+       
+       Each service gets its own proper space.
        ========================================================= */
 
     @media (max-width: 760px) {
 
       .service-cards-shell {
 
-        width: 100%;
-
         /*
-          The full service section uses the available
-          embed height.
+          Give the entire mobile section enough
+          vertical space for all three services.
+          
+          The Google Sites page itself can then
+          scroll normally.
         */
 
-        height: 100vh;
+        width: 100%;
+        height: 900px;
 
         padding:
-          6px 8px 8px;
+          6px 10px 10px;
       }
 
 
       .service-cards-grid {
 
         /*
-          ONE COLUMN.
+          ONE COLUMN
         */
 
         grid-template-columns:
           minmax(0, 1fr);
 
         /*
-          Three independent service sections.
+          THREE PROPER SERVICE SECTIONS
         */
 
         grid-template-rows:
@@ -641,7 +635,7 @@
         height: 100%;
 
         padding:
-          4px 6px;
+          4px 4px;
       }
 
 
@@ -654,8 +648,8 @@
         display: grid;
 
         /*
-          Card takes the main space.
-          Description and button remain below it.
+          The card gets the majority of the space.
+          Description and button sit underneath.
         */
 
         grid-template-rows:
@@ -683,9 +677,9 @@
         min-height: 0;
 
         padding:
-          18px 18px;
+          22px 20px;
 
-        border-radius: 16px;
+        border-radius: 17px;
       }
 
 
@@ -695,14 +689,14 @@
 
       .service-visual {
 
-        top: 15px;
-        right: 17px;
+        top: 18px;
+        right: 18px;
 
-        width: 55px;
-        height: 55px;
+        width: 65px;
+        height: 65px;
 
         transform:
-          scale(0.62);
+          scale(0.68);
 
         transform-origin:
           top right;
@@ -715,9 +709,9 @@
 
       .service-number {
 
-        margin-bottom: 10px;
+        margin-bottom: 12px;
 
-        font-size: 9px;
+        font-size: 10px;
 
         letter-spacing: 0.1em;
       }
@@ -731,9 +725,11 @@
 
         width: 100%;
 
-        font-size: 17px;
+        max-width: 80%;
 
-        line-height: 1.18;
+        font-size: 18px;
+
+        line-height: 1.2;
 
         text-align: left;
       }
@@ -741,8 +737,6 @@
 
       /* =====================================================
          MOBILE DESCRIPTION
-         
-         STILL OUTSIDE THE CARD
          ===================================================== */
 
       .service-description {
@@ -750,11 +744,11 @@
         width: 100%;
 
         margin:
-          10px 0 0;
+          12px 0 0;
 
-        font-size: 11px;
+        font-size: 12px;
 
-        line-height: 1.4;
+        line-height: 1.45;
 
         text-align: left;
       }
@@ -762,25 +756,21 @@
 
       /* =====================================================
          MOBILE BUTTON
-         
-         STILL OUTSIDE THE CARD
          ===================================================== */
 
       .service-button {
 
         justify-self: start;
 
-        min-height: 30px;
+        min-height: 31px;
 
         margin:
           10px 0 0;
 
         padding:
-          7px 12px;
+          7px 13px;
 
-        font-size: 9px;
-
-        border-width: 1px;
+        font-size: 10px;
       }
     }
 
@@ -793,8 +783,15 @@
 
       .service-cards-shell {
 
+        /*
+          Slightly taller because small screens
+          need more wrapping space.
+        */
+
+        height: 900px;
+
         padding:
-          4px 6px 6px;
+          5px 8px 8px;
       }
 
       .service-cards-grid {
@@ -818,61 +815,63 @@
       .service-card {
 
         padding:
-          14px 14px;
+          18px 16px;
 
-        border-radius: 14px;
+        border-radius: 15px;
       }
 
 
       .service-visual {
 
-        top: 11px;
-        right: 13px;
+        top: 14px;
+        right: 15px;
 
-        width: 48px;
-        height: 48px;
+        width: 55px;
+        height: 55px;
 
         transform:
-          scale(0.54);
+          scale(0.58);
       }
 
 
       .service-number {
 
-        margin-bottom: 7px;
+        margin-bottom: 9px;
 
-        font-size: 8px;
+        font-size: 9px;
       }
 
 
       .service-card-title {
 
-        font-size: 14px;
+        max-width: 78%;
 
-        line-height: 1.16;
+        font-size: 16px;
+
+        line-height: 1.17;
       }
 
 
       .service-description {
 
-        margin-top: 8px;
+        margin-top: 9px;
 
-        font-size: 9px;
+        font-size: 10px;
 
-        line-height: 1.35;
+        line-height: 1.38;
       }
 
 
       .service-button {
 
-        min-height: 27px;
+        min-height: 28px;
 
         margin-top: 8px;
 
         padding:
-          6px 10px;
+          6px 11px;
 
-        font-size: 8px;
+        font-size: 9px;
       }
     }
 
@@ -958,10 +957,8 @@
         </p>
 
 
-        <!--
-          BUTTON 01
-          Replace # with your Google Sites page link.
-        -->
+        <!-- BUTTON 01
+             Replace # with your Google Sites page link. -->
 
         <a
           class="service-button"
@@ -1017,10 +1014,8 @@
         </p>
 
 
-        <!--
-          BUTTON 02
-          Replace # with your Google Sites page link.
-        -->
+        <!-- BUTTON 02
+             Replace # with your Google Sites page link. -->
 
         <a
           class="service-button"
@@ -1078,10 +1073,8 @@
         </p>
 
 
-        <!--
-          BUTTON 03
-          Replace # with your Google Sites page link.
-        -->
+        <!-- BUTTON 03
+             Replace # with your Google Sites page link. -->
 
         <a
           class="service-button"
