@@ -6,15 +6,19 @@
 
   <title>Service Cards</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
+
     :root {
       --ink: #262626;
       --turquoise: #00cecb;
       --card: #ffffea;
       --subtext: #6b6b6b;
-
+      --line: #dedecb;
     }
 
     * {
@@ -24,6 +28,7 @@
     html,
     body {
       width: 100%;
+      min-height: 100%;
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -35,63 +40,114 @@
       background: transparent;
     }
 
-    /* Main container */
+
+    /* =========================================================
+       MAIN CONTAINER
+       ========================================================= */
+
     .service-cards-shell {
       width: 100%;
       max-width: 1400px;
+      height: 100%;
+
       margin: 0 auto;
+
       padding: 8px 12px 12px;
+
       background: transparent;
     }
 
-    /* Three-card grid */
+
+    /* =========================================================
+       SERVICE GRID
+       ========================================================= */
+
     .service-cards-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
       gap: 50px;
+
       width: 100%;
-      padding: 8px 8px 12px;
+      height: 100%;
+
+      padding: 8px;
     }
 
-    /* Individual service column */
+
+    /* =========================================================
+       SERVICE ITEM
+       
+       Each item contains:
+       1. Card
+       2. Description
+       3. Button
+       ========================================================= */
+
     .service-item {
-      min-width: 0;
-      text-align: center;
+      display: grid;
 
-      /* NEW: Makes each service column the same height */
-      display: flex;
-      flex-direction: column;
+      grid-template-rows:
+        1fr
+        auto
+        auto;
+
+      min-width: 0;
+      min-height: 0;
     }
 
-    /* Individual card */
+
+    /* =========================================================
+       CARD
+       ========================================================= */
+
     .service-card {
       position: relative;
+
       display: flex;
+      align-items: flex-start;
+
+      width: 100%;
+      height: 100%;
+
       min-width: 0;
-      min-height: 290px;
+      min-height: 250px;
 
       padding: 28px;
-      padding-top: 165px;
 
       border: 1px solid var(--line);
       border-radius: 22px;
-      overflow: hidden;
+
       background: var(--card);
 
-      box-shadow: 0 5px 18px rgba(38, 38, 38, 0.045);
+      overflow: hidden;
+
+      box-shadow:
+        0 5px 18px rgba(38, 38, 38, 0.045);
 
       transition:
-        transform 0.3s ease,
         box-shadow 0.3s ease,
         border-color 0.3s ease;
     }
 
-    /* Hover effect */
+
+    /* =========================================================
+       CARD HOVER
+       
+       THE CARD DOES NOT MOVE.
+       ========================================================= */
+
     .service-card:hover,
     .service-card:focus-visible {
+
       border-color: #bdbdbd;
-      box-shadow: 0 18px 34px rgba(38, 38, 38, 0.11);
-      transform: translateY(-5px) scale(1.012);
+
+      box-shadow:
+        0 18px 34px rgba(38, 38, 38, 0.11);
+
+      transform: none;
     }
 
     .service-card:focus-visible {
@@ -99,71 +155,111 @@
       outline-offset: 4px;
     }
 
-    /* Card content */
+
+    /* =========================================================
+       CARD CONTENT
+       ========================================================= */
+
     .service-card-content {
       position: relative;
       z-index: 2;
+
       width: 100%;
-      max-width: 100%;
+      min-width: 0;
+
       text-align: left;
     }
 
-    /* Number */
+
+    /* =========================================================
+       NUMBER
+       ========================================================= */
+
     .service-number {
       display: block;
+
       margin: 0 0 17px;
+
       color: var(--turquoise);
-      font-family: "Nunito Sans", system-ui, sans-serif;
+
       font-size: 0.85rem;
       font-weight: 700;
+
       letter-spacing: 0.14em;
+
       line-height: 1;
     }
 
-    /* Main card title */
+
+    /* =========================================================
+       TITLE
+       ========================================================= */
+
     .service-card-title {
+
       width: 100%;
       max-width: 100%;
+
       margin: 0;
 
       color: var(--ink);
-      font-family: "Nunito Sans", system-ui, sans-serif;
 
       font-size: 22px;
       font-weight: 700;
+
       line-height: 1.2;
 
       text-align: left;
+
       text-wrap: balance;
+
       overflow-wrap: normal;
       word-break: normal;
     }
 
-    /* Description below each card */
+
+    /* =========================================================
+       DESCRIPTION
+       
+       OUTSIDE THE CARD
+       ========================================================= */
+
     .service-description {
-      margin: 18px 4px 0;
+
+      width: 100%;
+
+      margin: 20px 0 0;
 
       color: var(--subtext);
-      font-family: "Nunito Sans", system-ui, sans-serif;
 
-      font-size: clamp(18px, 1.2vw, 17px);
+      font-size: 15px;
       font-weight: 300;
-      line-height: 1.58;
-      letter-spacing: 0;
 
-      text-align: center;
+      line-height: 1.58;
+
+      text-align: left;
     }
 
-    /* View Service button */
+
+    /* =========================================================
+       BUTTON
+       
+       OUTSIDE THE CARD
+       ========================================================= */
+
     .service-button {
-      display: flex;
+
+      display: inline-flex;
+
       align-items: center;
       justify-content: center;
 
+      justify-self: start;
+      align-self: start;
+
       width: fit-content;
 
-      /* NEW: Pushes every button to the same bottom position */
-      margin: auto auto 0;
+      margin: 22px 0 0;
 
       padding: 10px 20px;
 
@@ -174,9 +270,12 @@
       background: transparent;
 
       font-family: "Nunito Sans", system-ui, sans-serif;
+
       font-size: 15px;
       font-weight: 700;
+
       line-height: 1;
+
       text-decoration: none;
 
       transition:
@@ -186,12 +285,21 @@
         transform 0.25s ease;
     }
 
-    /* Button hover */
+
+    /* =========================================================
+       BUTTON HOVER
+       
+       ONLY THE BUTTON MOVES.
+       ========================================================= */
+
     .service-button:hover {
+
       color: #ffffff;
-      background: #00cecb;
-      border-color: #00cecb;
-      transform: translateY(-2px);
+
+      background: var(--turquoise);
+      border-color: var(--turquoise);
+
+      transform: translateY(-3px);
     }
 
     .service-button:focus-visible {
@@ -199,58 +307,86 @@
       outline-offset: 4px;
     }
 
-    /* Decorative visuals */
+
+    /* =========================================================
+       DECORATIVE VISUALS
+       ========================================================= */
+
     .service-visual {
+
       position: absolute;
+
       top: 30px;
       right: 30px;
+
       width: 92px;
       height: 92px;
 
       color: var(--turquoise);
+
       opacity: 0.72;
 
       pointer-events: none;
     }
 
-    /* Calendar */
+
+    /* =========================================================
+       CALENDAR
+       ========================================================= */
+
     .calendar-motif {
+
       border: 1.5px solid currentColor;
+
       border-radius: 11px;
     }
 
     .calendar-motif::before {
+
       content: "";
+
       position: absolute;
+
       top: 21px;
       right: 0;
       left: 0;
+
       border-top: 1.5px solid currentColor;
     }
 
     .calendar-motif::after {
+
       content: "";
+
       position: absolute;
+
       top: 37px;
       left: 18px;
+
       width: 8px;
       height: 8px;
 
       border: 1.5px solid currentColor;
 
       box-shadow:
+
         22px 0 0 -1.5px var(--card),
         22px 0 0 0 currentColor,
+
         0 22px 0 -1.5px var(--card),
         0 22px 0 0 currentColor,
+
         22px 22px 0 -1.5px var(--card),
         22px 22px 0 0 currentColor;
     }
 
     .calendar-rings {
+
       position: absolute;
+
       top: -6px;
       left: 22px;
+
       width: 47px;
       height: 13px;
 
@@ -258,101 +394,147 @@
       border-left: 1.5px solid currentColor;
     }
 
-    /* Profile */
+
+    /* =========================================================
+       PROFILE
+       ========================================================= */
+
     .profile-motif {
+
       border: 1.5px solid currentColor;
+
       border-radius: 50%;
     }
 
     .profile-motif::before {
+
       content: "";
+
       position: absolute;
+
       top: 17px;
       left: 33px;
+
       width: 23px;
       height: 23px;
 
       border: 1.5px solid currentColor;
+
       border-radius: 50%;
     }
 
     .profile-motif::after {
+
       content: "";
+
       position: absolute;
+
       bottom: 16px;
       left: 21px;
+
       width: 48px;
       height: 28px;
 
       border: 1.5px solid currentColor;
+
       border-bottom: 0;
-      border-radius: 28px 28px 0 0;
+
+      border-radius:
+        28px 28px 0 0;
     }
 
     .profile-line {
+
       position: absolute;
+
       right: -15px;
       bottom: 14px;
+
       width: 46px;
 
       border-top: 1.5px solid currentColor;
     }
 
-    /* Network nodes */
+
+    /* =========================================================
+       NETWORK NODES
+       ========================================================= */
+
     .nodes-motif::before,
     .nodes-motif::after,
     .node-center {
+
       content: "";
+
       position: absolute;
 
       width: 16px;
       height: 16px;
 
       border: 1.5px solid currentColor;
+
       border-radius: 50%;
+
       background: transparent;
     }
 
     .nodes-motif::before {
+
       top: 8px;
       right: 7px;
     }
 
     .nodes-motif::after {
+
       bottom: 8px;
       left: 7px;
     }
 
     .node-center {
+
       top: 39px;
       left: 39px;
     }
 
     .node-line {
+
       position: absolute;
+
       top: 45px;
       left: 21px;
+
       width: 50px;
 
       border-top: 1.5px solid currentColor;
 
-      transform: rotate(-38deg);
+      transform:
+        rotate(-38deg);
+
       transform-origin: center;
     }
 
     .node-line-secondary {
+
       position: absolute;
+
       top: 46px;
       left: 23px;
+
       width: 46px;
 
       border-top: 1.5px solid currentColor;
 
-      transform: rotate(39deg);
+      transform:
+        rotate(39deg);
+
       transform-origin: center;
     }
 
-    /* Tablet / smaller desktop */
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+
     @media (max-width: 1100px) {
 
       .service-cards-shell {
@@ -360,83 +542,350 @@
       }
 
       .service-cards-grid {
-        gap: 40px;
-        padding: 8px 6px 12px;
+        gap: 35px;
       }
 
       .service-card {
-        min-height: 270px;
+
+        min-height: 220px;
+
         padding: 24px;
-        padding-top: 150px;
       }
 
       .service-visual {
+
         top: 25px;
         right: 25px;
-        transform: scale(0.88);
-        transform-origin: top right;
+
+        transform:
+          scale(0.88);
+
+        transform-origin:
+          top right;
       }
 
       .service-card-title {
-        font-size: 23px;
-        line-height: 1.2;
+        font-size: 20px;
       }
 
       .service-description {
         font-size: 14px;
-        line-height: 1.55;
+        line-height: 1.5;
       }
 
       .service-button {
+
         font-size: 14px;
-        padding: 9px 18px;
+
+        padding:
+          9px 18px;
       }
     }
 
-    /* Mobile */
+
+    /* =========================================================
+       MOBILE
+       
+       EACH SERVICE IS A COMPLETE VERTICAL SECTION:
+       
+       CARD
+       ↓
+       DESCRIPTION
+       ↓
+       BUTTON
+       ↓
+       CARD
+       ↓
+       DESCRIPTION
+       ↓
+       BUTTON
+       ========================================================= */
+
     @media (max-width: 760px) {
 
       .service-cards-shell {
-        padding: 4px 8px 8px;
+
+        width: 100%;
+
+        /*
+          The full service section uses the available
+          embed height.
+        */
+
+        height: 100vh;
+
+        padding:
+          6px 8px 8px;
       }
+
 
       .service-cards-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 32px;
-        padding: 8px 6px 12px;
+
+        /*
+          ONE COLUMN.
+        */
+
+        grid-template-columns:
+          minmax(0, 1fr);
+
+        /*
+          Three independent service sections.
+        */
+
+        grid-template-rows:
+          repeat(3, minmax(0, 1fr));
+
+        gap: 18px;
+
+        width: 100%;
+        height: 100%;
+
+        padding:
+          4px 6px;
       }
+
+
+      /* =====================================================
+         MOBILE SERVICE ITEM
+         ===================================================== */
+
+      .service-item {
+
+        display: grid;
+
+        /*
+          Card takes the main space.
+          Description and button remain below it.
+        */
+
+        grid-template-rows:
+          minmax(0, 1fr)
+          auto
+          auto;
+
+        width: 100%;
+        height: 100%;
+
+        min-width: 0;
+        min-height: 0;
+      }
+
+
+      /* =====================================================
+         MOBILE CARD
+         ===================================================== */
 
       .service-card {
+
+        width: 100%;
+        height: 100%;
+
         min-height: 0;
-        padding: 28px;
-        padding-top: 142px;
+
+        padding:
+          18px 18px;
+
+        border-radius: 16px;
       }
+
+
+      /* =====================================================
+         MOBILE VISUAL
+         ===================================================== */
+
+      .service-visual {
+
+        top: 15px;
+        right: 17px;
+
+        width: 55px;
+        height: 55px;
+
+        transform:
+          scale(0.62);
+
+        transform-origin:
+          top right;
+      }
+
+
+      /* =====================================================
+         MOBILE NUMBER
+         ===================================================== */
+
+      .service-number {
+
+        margin-bottom: 10px;
+
+        font-size: 9px;
+
+        letter-spacing: 0.1em;
+      }
+
+
+      /* =====================================================
+         MOBILE TITLE
+         ===================================================== */
 
       .service-card-title {
+
         width: 100%;
-        max-width: 100%;
-        font-size: 23px;
-        line-height: 1.2;
+
+        font-size: 17px;
+
+        line-height: 1.18;
+
+        text-align: left;
       }
+
+
+      /* =====================================================
+         MOBILE DESCRIPTION
+         
+         STILL OUTSIDE THE CARD
+         ===================================================== */
 
       .service-description {
-        margin-top: 16px;
-        font-size: 15px;
-        line-height: 1.6;
+
+        width: 100%;
+
+        margin:
+          10px 0 0;
+
+        font-size: 11px;
+
+        line-height: 1.4;
+
+        text-align: left;
       }
 
+
+      /* =====================================================
+         MOBILE BUTTON
+         
+         STILL OUTSIDE THE CARD
+         ===================================================== */
+
       .service-button {
-        margin: 18px auto 0;
-        padding: 10px 19px;
-        font-size: 15px;
+
+        justify-self: start;
+
+        min-height: 30px;
+
+        margin:
+          10px 0 0;
+
+        padding:
+          7px 12px;
+
+        font-size: 9px;
+
+        border-width: 1px;
       }
     }
 
-    /* Accessibility */
+
+    /* =========================================================
+       SMALL PHONES
+       ========================================================= */
+
+    @media (max-width: 390px) {
+
+      .service-cards-shell {
+
+        padding:
+          4px 6px 6px;
+      }
+
+      .service-cards-grid {
+
+        gap: 14px;
+
+        padding:
+          3px;
+      }
+
+
+      .service-item {
+
+        grid-template-rows:
+          minmax(0, 1fr)
+          auto
+          auto;
+      }
+
+
+      .service-card {
+
+        padding:
+          14px 14px;
+
+        border-radius: 14px;
+      }
+
+
+      .service-visual {
+
+        top: 11px;
+        right: 13px;
+
+        width: 48px;
+        height: 48px;
+
+        transform:
+          scale(0.54);
+      }
+
+
+      .service-number {
+
+        margin-bottom: 7px;
+
+        font-size: 8px;
+      }
+
+
+      .service-card-title {
+
+        font-size: 14px;
+
+        line-height: 1.16;
+      }
+
+
+      .service-description {
+
+        margin-top: 8px;
+
+        font-size: 9px;
+
+        line-height: 1.35;
+      }
+
+
+      .service-button {
+
+        min-height: 27px;
+
+        margin-top: 8px;
+
+        padding:
+          6px 10px;
+
+        font-size: 8px;
+      }
+    }
+
+
+    /* =========================================================
+       ACCESSIBILITY
+       ========================================================= */
+
     @media (prefers-reduced-motion: reduce) {
 
       .service-card,
       .service-button {
+
         transition:
           box-shadow 0.3s ease,
           border-color 0.3s ease,
@@ -447,11 +896,14 @@
       .service-card:hover,
       .service-card:focus-visible,
       .service-button:hover {
+
         transform: none;
       }
     }
+
   </style>
 </head>
+
 
 <body>
 
@@ -462,11 +914,17 @@
       aria-label="LinkedIn and content services"
     >
 
-      <!-- CARD 01 -->
+
+      <!-- =====================================================
+           SERVICE 01
+           ===================================================== -->
+
       <div class="service-item">
 
+        <!-- CARD -->
+
         <article
-          class="service-card canva-card"
+          class="service-card"
           tabindex="0"
         >
 
@@ -476,6 +934,7 @@
           >
             <span class="calendar-rings"></span>
           </div>
+
 
           <div class="service-card-content">
 
@@ -488,11 +947,21 @@
             </h2>
 
           </div>
+
         </article>
+
+
+        <!-- DESCRIPTION -->
 
         <p class="service-description">
           Plan, create, organize, schedule and publish content across LinkedIn, Facebook, Instagram and other platforms.
         </p>
+
+
+        <!--
+          BUTTON 01
+          Replace # with your Google Sites page link.
+        -->
 
         <a
           class="service-button"
@@ -505,11 +974,16 @@
       </div>
 
 
-      <!-- CARD 02 -->
+      <!-- =====================================================
+           SERVICE 02
+           ===================================================== -->
+
       <div class="service-item">
 
+        <!-- CARD -->
+
         <article
-          class="service-card canva-card"
+          class="service-card"
           tabindex="0"
         >
 
@@ -519,6 +993,7 @@
           >
             <span class="profile-line"></span>
           </div>
+
 
           <div class="service-card-content">
 
@@ -531,11 +1006,21 @@
             </h2>
 
           </div>
+
         </article>
+
+
+        <!-- DESCRIPTION -->
 
         <p class="service-description">
           Manage LinkedIn content, optimise profiles and company pages, and help maintain a professional and consistent presence.
         </p>
+
+
+        <!--
+          BUTTON 02
+          Replace # with your Google Sites page link.
+        -->
 
         <a
           class="service-button"
@@ -548,11 +1033,16 @@
       </div>
 
 
-      <!-- CARD 03 -->
+      <!-- =====================================================
+           SERVICE 03
+           ===================================================== -->
+
       <div class="service-item">
 
+        <!-- CARD -->
+
         <article
-          class="service-card canva-card"
+          class="service-card"
           tabindex="0"
         >
 
@@ -565,6 +1055,7 @@
             <span class="node-line-secondary"></span>
           </div>
 
+
           <div class="service-card-content">
 
             <span class="service-number">
@@ -576,11 +1067,21 @@
             </h2>
 
           </div>
+
         </article>
+
+
+        <!-- DESCRIPTION -->
 
         <p class="service-description">
           Research prospects, manage connection and outreach activity, track conversations and hand qualified leads back to the client.
         </p>
+
+
+        <!--
+          BUTTON 03
+          Replace # with your Google Sites page link.
+        -->
 
         <a
           class="service-button"
@@ -591,6 +1092,7 @@
         </a>
 
       </div>
+
 
     </section>
 
