@@ -72,13 +72,14 @@ body {
 
   position: relative;
 
+  /* CARD BACKGROUND */
   background: #ffffea;
 
   border-radius: 20px;
 
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(0,0,0,0.08);
 
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 
   overflow: hidden;
 }
@@ -103,7 +104,8 @@ body {
   align-items: center;
   justify-content: center;
 
-  background: rgba(255,255,255,0.14);
+  /* NUMBER BACKGROUND */
+  background: #00cecb;
 
   color: #ffffff;
 
@@ -125,7 +127,8 @@ body {
 
   margin: 0;
 
-  color: #ffffff;
+  /* DARK TEXT FOR LIGHT CARD */
+  color: #262626;
 
   font-size: 25px;
   line-height: 1.25;
@@ -168,6 +171,7 @@ body {
 
   border-radius: 999px;
 
+  /* BUTTON COLOUR */
   background: #00cecb;
 
   color: #ffffff;
@@ -238,13 +242,8 @@ body {
 
 
   /*
-     IMPORTANT:
-
-     The desktop grid is completely
-     removed on mobile.
-
-     Each service simply flows
-     underneath the previous one.
+     MOBILE USES NORMAL DOCUMENT FLOW.
+     Each service sits underneath the previous one.
   */
 
   .service-cards-grid {
@@ -257,10 +256,9 @@ body {
   }
 
 
-  /*
-     Each service is an independent
-     block with its own natural height.
-  */
+  /* =====================================
+     EACH MOBILE SERVICE
+  ===================================== */
 
   .service-item {
     display: block !important;
@@ -275,11 +273,6 @@ body {
     padding: 0 !important;
   }
 
-
-  /*
-     Remove extra space after
-     the final service.
-  */
 
   .service-item:last-child {
     margin-bottom: 0 !important;
@@ -306,6 +299,9 @@ body {
     border-radius: 18px !important;
 
     overflow: hidden !important;
+
+    /* LIGHT CARD */
+    background: #ffffea !important;
   }
 
 
@@ -323,6 +319,8 @@ body {
     height: 44px !important;
 
     margin: 0 !important;
+
+    background: #00cecb !important;
 
     font-size: 15px !important;
   }
@@ -344,7 +342,7 @@ body {
     margin: 0 !important;
     padding: 0 !important;
 
-    color: #ffffff !important;
+    color: #262626 !important;
 
     font-size: 20px !important;
     line-height: 1.25 !important;
@@ -395,6 +393,10 @@ body {
     margin: 11px auto 0 !important;
 
     padding: 11px 20px !important;
+
+    background: #00cecb !important;
+
+    color: #ffffff !important;
 
     font-size: 13px !important;
 
@@ -477,7 +479,7 @@ body {
         Plan, create, and publish content that keeps your social media active, consistent, and aligned with your brand.
       </div>
 
-      <!-- PASTE SERVICE 1 PAGE LINK INSTEAD OF # -->
+      <!-- CHANGE # TO YOUR SERVICE 1 PAGE LINK -->
       <a href="#" class="service-button">
         View Service
       </a>
@@ -508,7 +510,7 @@ body {
         Build a professional LinkedIn presence with thoughtful content, profile optimisation, and consistent publishing.
       </div>
 
-      <!-- PASTE SERVICE 2 PAGE LINK INSTEAD OF # -->
+      <!-- CHANGE # TO YOUR SERVICE 2 PAGE LINK -->
       <a href="#" class="service-button">
         View Service
       </a>
@@ -539,7 +541,7 @@ body {
         Find and connect with potential clients, start meaningful conversations, and help turn LinkedIn connections into opportunities.
       </div>
 
-      <!-- PASTE SERVICE 3 PAGE LINK INSTEAD OF # -->
+      <!-- CHANGE # TO YOUR SERVICE 3 PAGE LINK -->
       <a href="#" class="service-button">
         View Service
       </a>
